@@ -1,0 +1,16 @@
+mercurial
+psycopg2
+python-memcached
+python-openid
+oauth2
+pil
+markdown
+googlemaps
+python-dateutil
+django-registration
+django-markupfield
+django-social-auth
+South
+scrapy
+django-generic-confirmation
+django-threadedcomments

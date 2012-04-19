@@ -1,0 +1,9 @@
+-- Drop existing objects.
+DROP DATABASE <name>;
+DROP USER <name>;
+
+-- Create the user.
+CREATE USER <name> WITH NOCREATEDB NOCREATEUSER;
+
+-- Create the database.
+CREATE DATABASE <name> WITH OWNER <name>;
