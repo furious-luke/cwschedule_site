@@ -1,0 +1,50 @@
+{% extends "site_base.html" %}
+
+{% block css %}{{ block.super }}
+  <link rel="stylesheet" href="{{ STATIC_URL }}ajax_form/css/jquery.ajax_form.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/new_node.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/test.css">
+{% endblock %}
+
+{% block js %}{{ block.super }}
+  <script src="{{ STATIC_URL }}attr_stack/js/jquery.attr_stack.js"></script>
+  <script src="{{ STATIC_URL }}ajax_form/js/jquery.form.js"></script>
+  <script src="{{ STATIC_URL }}ajax_form/js/jquery.ajax_form.js"></script>
+  <script src="{{ STATIC_URL }}js/tree.js"></script>
+  <script src="{{ STATIC_URL }}js/tree_navigation.js"></script>
+  <script src="{{ STATIC_URL }}js/manage.js"></script>
+  <script src="{{ STATIC_URL }}js/new_node.js"></script>
+{% endblock %}
+
+{% block heading %}Manage{% endblock %}
+{% block subtext %}Create and edit tasks{% endblock %}
+
+{% block content %}
+  <div class="row-fluid">
+    <div class="span6">
+      <div class="well">
+        Big description.
+      </div>
+    </div>
+    <div class="span6"></div>
+  </div>
+
+  <div class="row-fluid">
+
+    <div class="node">
+      <div class="left-controls">
+        <div class="control new-root btn" title="New root task">
+          <i class="icon-plus"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {% include "cwschedule/tree.html" %}
+  {% include "cwschedule/new_node.html" %}
+  {% include "cwschedule/actions.html" %}
+  {% include "cwschedule/flat_tree.html" %}
+  {% include "cwschedule/confirm_delete.html" %}
+
+{% endblock %}

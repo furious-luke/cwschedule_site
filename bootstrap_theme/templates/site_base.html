@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+{% load lightnav %}
+
+{% block media %}
+  {% navbar_media "cwschedule.navbars.MainNavbar" %}
+{% endblock %}
+
+{% block navbar %}
+  {% navbar "cwschedule.navbars.MainNavbar" %}
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    {% block page-header %}
+      <div class="page-header">
+        {% block header %}
+          <h1>{% block heading %}{% endblock %} <small> {% block subtext %}{% endblock %}</small></h1>
+        {% endblock %}
+      </div>
+    {% endblock %}
+    {% block content %}{% endblock %}
+  </div>
+{% endblock %}

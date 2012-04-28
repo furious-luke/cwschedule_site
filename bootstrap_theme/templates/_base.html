@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block meta %}{% endblock %}
+    {% block media %}{% endblock %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
+    {% block css %}{% endblock %}
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+    {% block js %}{% endblock %}
+  </head>
+  <body>
+    {% block navbar %}{% endblock %}
+    {% block body %}{% endblock %}
+  </body>
+</html>

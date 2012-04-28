@@ -1,0 +1,94 @@
+.node {
+    height: 28px;
+    margin-top: 2px;
+    line-height: 24px;
+}
+
+.node > .container {
+}
+
+.node > .container .center {
+    float: left;
+    width: 280px;
+    height: 100%;
+}
+
+.node:not(.selected) > .container .center:hover {
+    background-color: #eee;
+}
+
+.node.selected > .container .center {
+    background-color: #0060cc;
+    color: white;
+}
+
+.node.selected > .container .center .badges i {
+    background-image: url(../bootstrap/img/glyphicons-halflings-white.png);
+}
+
+.left-block {
+    width: 10px;
+    height: 26px;
+    background-color: #eee;
+    float: left;
+}
+
+.node > .container .name {
+    margin-left: 10px;
+    float: left;
+    cursor: default;
+}
+
+.node > .container .badges {
+    float: right;
+    margin-top: 2px;
+    margin-right: 4px;
+}
+
+.node > .children {
+    margin-left: 28px;
+    /* overflow: auto; */
+    /* float: none; */
+}
+
+.left-controls {
+    float: left;
+    width: 24px;
+    height: 100%;
+    margin-top: 2px;
+    margin-right: 4px;
+}
+
+.right-controls {
+    /* float: left; */
+    /* width: 24px; */
+    height: 100%;
+    /* margin-top: 1px; */
+    margin-left: 4px;
+}
+
+.control {
+    width: 1px;
+    height: 13px;
+}
+
+.left-controls .control {
+    margin-top: -6px;
+}
+
+.control i {
+    margin-left: -6px;
+    margin-top: -2px;
+}
+
+.control i.icon-trash {
+    margin-left: -7px;
+}
+
+.modal-open .popover {
+    z-index: 1010;
+}
+
+.popover-inner {
+    width: 160px;
+}

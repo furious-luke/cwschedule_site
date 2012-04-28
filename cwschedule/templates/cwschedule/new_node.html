@@ -1,0 +1,19 @@
+<div id="template-new-node" class="node new" style="display:none;">
+  <div class="left-controls"></div>
+  <form action="/node/create/" method="post">{% csrf_token %}
+    {% for field in create_node_form %}
+      {{ field }}
+    {% endfor %}
+    <!-- <input id="id_name" type="text" placeholder="Name" /> -->
+    <!-- <input id="id_deadline" type="text" placeholder="Deadline" /> -->
+    <!-- <input id="id_estimate" type="text" placeholder="Estimate" /> -->
+    <div class="right-controls">
+      <div class="control save btn">
+        <i class="icon-ok" title="Save"></i>
+      </div>
+      <div class="control cancel btn">
+        <i class="icon-remove" title="Cancel"></i>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,1 +1,2 @@
+furious-luke/python-utils
 furious-luke/django-utils

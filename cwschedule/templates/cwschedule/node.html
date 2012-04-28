@@ -1,0 +1,35 @@
+<div class="node" pk="{{ node.pk }}" ch="{{ node.child_pks|join:" " }}" pa="{{ node.parent_pks|join:" " }}">
+  <div class="container">
+
+    <div class="left-controls">
+      <div class="expand control btn" title="Expand" style="display:none">
+        <i class="icon-chevron-right"></i>
+      </div>
+      <div class="collapse control btn" title="Collapse" style="display:none">
+        <i class="icon-chevron-down"></i>
+      </div>
+    </div>
+
+    <div class="center">
+      <div class="left-block"></div>
+      <div class="name">{{ node.name }}</div>
+      <div class="badges">
+        {% if not node.has_details %}
+          <i class="icon-warning-sign" title="Missing details"></i>
+        {% endif %}
+        {% if node.is_repeating %}
+          <i class="icon-repeat" title="Repeating task"></i>
+        {% endif %}
+        {% if node.has_notes %}
+          <i class="icon-file" title="Has notes"></i>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="right-controls">
+    </div>
+  </div>
+
+  <div class="children">
+  </div>
+</div>

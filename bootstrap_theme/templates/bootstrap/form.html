@@ -1,0 +1,35 @@
+{% if form.non_field_errors %}
+  <div class="alert-message block-message error">
+    <p>
+      <strong>{{ form_error_title }}</strong>
+        <ul>
+	  {{ form.non_field_errors|unordered_list }}
+	</ul>
+    </p>
+  </div>
+{% endif %}
+<fieldset>
+  {% for field in form %}
+    {% if field.is_hidden %}
+      {{ field }}
+    {% else %}
+      <div class="control-group{% if field.errors %} error{% endif %}">
+        {% if field.label %}
+          <label class="control-label" for="{{ field.auto_id }}">{{ field.label|safe }}</label>
+        {% endif %}
+        <div class="controls">
+          {{ field }}
+          {% for error in field.errors %}
+            <span class="help-inline">{{ error }}</span>
+          {% endfor %}
+          {% if field.help_text %}
+            <p class="help-block">{{ field.help_text|safe }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</fieldset>
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>

@@ -1,0 +1,21 @@
+.node.new form {
+    margin: 0;
+    padding: 0;
+}
+
+.node.new input#id_name {
+    width: 150px;
+    float: left;
+    margin-bottom: 0px;
+}
+
+.node.new input:not(#id_name) {
+    width: 80px;
+    float: left;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+.node.new .right-controls {
+    float: left;
+}

@@ -1,0 +1,11 @@
+{% extends "site_base.html" %}
+{% load bootstrap_tags %}
+
+{% block heading %}Login{% endblock %}
+{% block subtext %}{% endblock %}
+
+{% block content %}
+  <form class="form-horizontal" action="" method="post">{% csrf_token %}
+    {{ form|as_bootstrap }}
+  </form>
+{% endblock %}
