@@ -1,10 +1,11 @@
 .node {
-    height: 28px;
     margin-top: 2px;
-    line-height: 24px;
+    line-height: 26px;
 }
 
 .node > .container {
+    height: 28px;
+    width: auto;
 }
 
 .node > .container .center {
@@ -28,7 +29,7 @@
 
 .left-block {
     width: 10px;
-    height: 26px;
+    height: 100%;
     background-color: #eee;
     float: left;
 }
@@ -51,6 +52,10 @@
     /* float: none; */
 }
 
+.node.root > .children {
+    margin-left: 0;
+}
+
 .left-controls {
     float: left;
     width: 24px;
@@ -60,7 +65,7 @@
 }
 
 .right-controls {
-    /* float: left; */
+    float: left;
     /* width: 24px; */
     height: 100%;
     /* margin-top: 1px; */

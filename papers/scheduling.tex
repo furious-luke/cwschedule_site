@@ -1,0 +1,82 @@
+\title{A Very Simple \LaTeXe{} Template}
+\author{
+  Luke Hodkinson \\
+  Center for Astrophysics and Supercomputing \\
+  Swinburne University of Technology \\
+  Melbourne, Hawthorn 32000, \underline{Australia}
+}
+\date{\today}
+
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\newcommand{\deriv}[2]{\ensuremath{\frac{\mathrm{d}#1}{\mathrm{d}#2}}}
+\newcommand{\sderiv}[2]{\ensuremath{\frac{\mathrm{d}^2#1}{\mathrm{d}#2^2}}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+  Fluid flow optimisation.
+\end{abstract}
+
+\section{Introduction}
+Difficulting in solving scheduling problem.
+
+\paragraph{Outline}
+The remainder of this article is organized as follows.
+Section~\ref{previous work} gives account of previous work.
+Our new and exciting results are described in Section~\ref{results}.
+Finally, Section~\ref{conclusions} gives the conclusions.
+
+\section{Previous work}\label{previous work}
+A much longer \LaTeXe{} example was written by Gil~\cite{Gil:02}.
+
+\section{Maths}
+For each task, $T_i$, represent its schedule as a density function,
+  \[ d_i = d_i\left( t \right) \,. \]
+$d_i$ maps onto $\left[0, 1\right]$ and $d_i \in \mathbb{R}$. Also
+$t \in \mathbb{R}$ and is in $\left[0, 1\right]$. Also define density
+flow as
+\begin{eqnarray*}
+  u_i & = & u_i\left( t \right) \\
+      & = & \deriv{d_i}{t} \,.
+\end{eqnarray*}
+
+Require
+  \[ \sum_i d_i\left( t_j \right) = 1, \quad \forall j \]
+and
+  \[ \int_{-\infty}^{\infty} d_i \, \mathrm{d}t = w_i, \quad \forall i . \]
+
+Define a pressure variable used to drive flow, $P = P\left( t \right)$.
+This will be the method used to incorporate a kind of fitness function.
+  \[ P = P\left( t \right) \]
+  \[ f_P = \deriv{P}{t} \]
+  \[ \sum_i \mu_i\deriv{d_i}{\tau} = -P \]
+  \[ \sum_i \deriv{}{t}\left(\mu_i\deriv{d_i}{t}\right) = -\deriv{P}{t} \]
+  \[ \sum_i \mu_i\sderiv{d_i}{t} = -\deriv{P}{t} \]
+  \[ \sderiv{}{t}\sum_i\mu_id_i = -\deriv{P}{t} \]
+Implies the continuity equations would be
+  \[ \deriv{u_i}{t} = \deriv{d_i}{t} \quad \forall i . \]
+This shows that divergence or convergence in the density flow must corelate
+to a respective decrease or increase in the density.
+
+Alternate description:
+  \[ P = P\left( d_i \right) \]
+  \[ P_j = \deriv{P}{d_j} \]
+  \[ \sum_i \deriv{d_i}{t} = -P \]
+  \[ \sum_i \deriv{}{d_j}\left( \deriv{d_i}{t} \right) = -P_j \]
+
+From Stokes flow:
+
+\section{Results}\label{results}
+In this section we describe the results.
+
+\section{Conclusions}\label{conclusions}
+We worked hard, and achieved very little.
+
+\bibliographystyle{abbrv}
+\bibliography{main}
+
+\end{document}

@@ -68,6 +68,12 @@ class Node(Model):
     def child_pks(self):
         return [c.pk for c in self.dependencies.all()]
 
+    def has_details(self):
+        return self.has_estimate() and self.dead_line is not None
+
+    def is_repeating(self):
+        return self.repeating.exists()
+
     def descendants(self):
         desc_list = list(self.dependencies.all())
         desc_set = set(desc_list)

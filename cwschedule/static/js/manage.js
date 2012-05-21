@@ -6,45 +6,36 @@ function copy_template(tmpl) {
 ///
 /// Select/deselect nodes.
 ///
-function toggle_nodes() {
+function toggle_nodes(state) {
     var $this = $(this);
     var center = $this.find('> .container .center');
 
-    // Toggle the popover.
-    center.popover('toggle');
+    // Toggle the right-controls.
+    var actions = $this.find('> .container .actions');
+    actions.toggle(state);
 
     // Toggle the selected class.
-    $this.toggleClass('selected');
-
-    // Setup the popover.
-    var popover = $('body > .popover');
-    popover.find('[title]').tooltip();
-    popover.find('.control.edit').click(function() {
-        alert('edit');
-    });
-    popover.find('.control.new').click(function() {
-        insert_new_node_controls($this.children('.children:first'));
-    });
-    popover.find('.control.delete').click(function() {
-        $('#modal-confirm-delete .modal-body p b').html(
-            center.find('.name').text()
-        );
-    });
+    $this.toggleClass('selected', state);
 }
 
 ///
-/// Setup nodes.
+/// Update node event.
 ///
-function setup_nodes() {
-    var $this = $(this);
-    var centers = $this.find('> .container .center');
+function node_update(event, tree, node) {
+    var center = node.find('> .container > .center');
 
-    // Prepare popovers.
-    centers.popover({
-        title: 'Actions',
-        content: copy_template($('#template-actions')).html(),
-        trigger: 'manual'
-    });
+    // Enable all center tooltips.
+    center.find('[title]').tooltip();
+}
+
+///
+/// Setup node event.
+///
+function setup_node(event, tree, node) {
+    var centers = node.find('> .container .center');
+
+    // Call node_update to catch center related things.
+    node_update(event, tree, node);
 
     // Prepare action for clicking nodes.
     centers.click(function() {
@@ -52,27 +43,99 @@ function setup_nodes() {
         var node = $cur_this.closest('.node');
         var selected = $('.node.selected');
         if( !node.is(selected) )
-            selected.each(toggle_nodes);
+            selected.each(function() {
+                toggle_nodes.call(this, false);
+            });
         toggle_nodes.call(node[0]);
     });
 
-    // Enable all tooltips.
-    $this.find('[title]').tooltip();
+    // Enable all non-center tooltips.
+    node.find('> .container > .left-controls [title]').tooltip();
+    node.find('> .container > .right-controls [title]').tooltip();
+
+    // Find the actions container.
+    var actions = node.find('> .container .actions');
+
+    // Setup edit.
+    actions.find('.control.edit').click(function() {
+        var modal_body = $('#modal-details > .modal-body');
+
+        // Clear out any pre-existing content.
+        modal_body.html('');
+
+        // Show the waiting bit.
+        modal_body.addClass('waiting');
+
+        // Add the node to the dialog properties.
+        $('#modal-details').prop('node', node);
+
+        // Load the content.
+        modal_body.load(
+            '/node/' + node.attr('pk') + '/details/',
+            function(response, status) {
+
+                // Clear out the waiting gif.
+                modal_body.removeClass('waiting');
+
+                if(status == 'success') {
+
+                    // Activate reform.
+                    modal_body.find('.reform').reform();
+                }
+                else {
+                    alert('Server error.');
+                }
+            }
+        );
+    });
+
+    // Setup create.
+    actions.find('.control.create').click(function() {
+        tree.tree('toggle_children', node, true, function() {
+            insert_create_node_controls(tree, tree.tree('children_container', node));
+        });
+    });
+
+    // Setup link.
+    actions.find('.control.link').click(function() {
+        tree.tree('toggle_children', node, true, function() {
+            insert_link_node_controls(tree, tree.tree('children_container', node));
+        });
+    });
+
+    // Setup unlink.
+    actions.find('.control.unlink').toggle(tree.tree('has_parent', node)).click(function() {
+        $('#modal-confirm-unlink .modal-body p b').html(
+            $(this).closest('.container').find('.name').text()
+        );
+        $('#modal-confirm-unlink').prop('node', node);
+    });
+
+    // Setup delete.
+    actions.find('.control.delete').click(function() {
+        $('#modal-confirm-delete .modal-body p b').html(
+            $(this).closest('.container').find('.name').text()
+        );
+        $('#modal-confirm-delete').prop('node', node);
+    });
 }
 
 !function( $ ) {
     $(document).ready(function() {
 
-        // Grow the tree.
-        grow_tree();
-        setup_tree_navigation(undefined, undefined, setup_nodes);
+        // Initialise the tree.
+        $('.tree').tree();
 
-        // Prepare popovers for all the visible nodes.
-        $('.node').each(setup_nodes);
+        // Setup events.
+        $('.tree').on('node_ready', setup_node);
+        $('.tree').on('node_update', node_update);
+
+        // Grow the tree.
+        $('.tree').tree('grow');
 
         // Setup action for new root node.
-        $('.control.new-root').click(function() {
-            insert_new_node_controls($('.node.root:first'));
+        $('.control.create-root').click(function() {
+            insert_create_node_controls($('.tree'), $('.node.root:first > .children:first'));
         });
 
     });

@@ -1,0 +1,19 @@
+<div id="template-link-node" class="node link" style="display:none;">
+  <div class="container">
+    <div class="left-controls"></div>
+    <div class="left-block"></div>
+    <form method="post">{% csrf_token %}
+      {% for field in link_node_form %}
+        {{ field }}
+      {% endfor %}
+      <div class="right-controls">
+        <div class="control save btn">
+          <i class="icon-ok" title="Save"></i>
+        </div>
+        <div class="control cancel btn">
+          <i class="icon-remove" title="Cancel"></i>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,14 +1,14 @@
-<div id="template-actions" class="actions" style="display:none;">
-  <div class="control edit btn" title="Edit task">
+<div class="actions" style="display:none;">
+  <div class="control edit btn" data-toggle="modal" href="#modal-details" title="Edit task">
     <i class="icon-edit"></i>
   </div>
-  <div class="control new btn" title="New subtask">
+  <div class="control create btn" title="Create subtask">
     <i class="icon-plus"></i>
   </div>
   <div class="control link btn" title="Link subtask">
     <i class="icon-resize-small"></i>
   </div>
-  <div class="control unlink btn" title="Unlink subtask">
+  <div class="control unlink btn" data-toggle="modal" href="#modal-confirm-unlink" title="Unlink from parent">
     <i class="icon-resize-full"></i>
   </div>
   <div class="control delete btn" data-toggle="modal" href="#modal-confirm-delete" title="Delete task">

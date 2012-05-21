@@ -1,0 +1,18 @@
+.node.link form {
+    margin: 0;
+    padding: 0;
+}
+
+.node.link input#id_node {
+    width: 340px;
+    float: left;
+    margin-bottom: 0px;
+}
+
+.node.link .right-controls {
+    float: left;
+}
+
+.node.link .left-block {
+    margin-right: 4px;
+}

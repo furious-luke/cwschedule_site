@@ -1,0 +1,48 @@
+{% load timedelta %}
+{% load bootstrap_tags %}
+
+<form class="form-horizontal" action="/node/{{ node.pk }}/update/" method="post">{% csrf_token %}
+  <div class="tabs">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#basic" data-toggle="tab">Basic</a></li>
+      <li><a href="#urgency" data-toggle="tab">Urgency</a></li>
+      <li><a href="#description" data-toggle="tab">Description</a></li>
+      <li><a href="#repeating" data-toggle="tab">Repeating</a></li>
+      <!-- <li><a href="#notes">Notes</a></li> -->
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="basic">
+        <fieldset>
+	  {{ details_form.name|as_bootstrap_field }}
+	  {{ details_form.kind|as_bootstrap_field }}
+	  {{ details_form.completed|as_bootstrap_field }}
+	  {% if user.is_staff %}
+	    {{ details_form.site_related|as_bootstrap_field }}
+	  {% endif %}
+        </fieldset>
+      </div>
+      <div class="tab-pane" id="urgency">
+        <fieldset>
+	  {{ details_form.priority|as_bootstrap_field }}
+	  {{ details_form.initial_estimate|as_bootstrap_field }}
+	  {{ details_form.ongoing_estimate|as_bootstrap_field }}
+	  {{ details_form.dead_line|as_bootstrap_field }}
+        </fieldset>
+      </div>
+      <div class="tab-pane" id="description">
+        <fieldset>
+	  {{ details_form.description|as_bootstrap_field }}
+        </fieldset>
+      </div>
+      <div class="tab-pane" id="repeating">
+        <fieldset>
+	  {% include "cwschedule/details_repeating.html" %}
+        </fieldset>
+      </div>
+    </div>
+    <!-- <div id="notes"> -->
+    <!--   <fieldset> -->
+    <!--   </fieldset> -->
+    <!-- </div> -->
+  </div>
+</form>

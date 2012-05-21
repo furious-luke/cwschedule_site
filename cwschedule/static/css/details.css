@@ -1,0 +1,90 @@
+.modal-details #id_completed {
+    margin-top: 8px;
+}
+
+.repeating.reform {
+    margin-left: 70px;
+}
+
+.repeating.reform .delete {
+    position: relative;
+}
+
+.repeating.reform label {
+    position: absolute;
+    bottom: 1px;
+    left: 15px;
+    width: auto;
+}
+
+.repeating.reform .reform-forms-ctr {
+    overflow: hidden;
+}
+
+.repeating.reform .reform-form-ctr {
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+.repeating.reform input[id$="skip"] {
+    margin-top: 1px;
+    width: 60px;
+}
+
+.repeating.reform select[id$="period"] {
+    margin-top: 1px;
+    width: 100px;
+    height: 28px;
+}
+
+.repeating.reform .reform-form {
+    float: left;
+}
+
+.repeating.reform .reform-remove-btn {
+    flat: left;
+    margin-left: 20px;
+}
+
+/* .dialog-content { */
+/*     padding-top: 10px; */
+/*     padding-left: 20px; */
+/*     overflow: auto; */
+/* } */
+
+/* .dialog-content input, .dialog-content textarea { */
+/*     margin: 4px; */
+/*     display: block; */
+/* } */
+
+/* .dialog-content #priority-box { */
+/*     overflow: auto; */
+/* } */
+
+/* .dialog-content #priority-label { */
+/*     float: left; */
+/* } */
+
+/* .dialog-content #priority-radio { */
+/*     display: block; */
+/*     width: 200px; */
+/*     float: left; */
+/* } */
+
+/* .dialog-content .radio { */
+/*     display: block; */
+/*     margin: 4px; */
+/*     overflow: auto; */
+/* } */
+
+/* .dialog-content label { */
+/*     width: auto; */
+/* } */
+
+/* .dialog-content #priority-label { */
+/*     margin-top: 10px; */
+/* } */
+
+/* .dialog-content input, .dialog-content textarea { */
+/*     width: 235px; */
+/* } */

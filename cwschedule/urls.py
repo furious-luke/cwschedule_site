@@ -12,5 +12,14 @@ urlpatterns = patterns('',
 
     url(r'^manage/$', 'cwschedule.views.manage', name='manage'),
     url(r'^node/create/$', 'cwschedule.views.create_node', name='create_node'),
+    url(r'^node/(\d+)/create/$', 'cwschedule.views.create_node', name='create_node'),
+    url(r'^node/(\d+)/link/$', 'cwschedule.views.link_node', name='link_node'),
+    url(r'^node/(\d+)/delete/$', 'cwschedule.views.delete_node', name='delete_node'),
+    url(r'^node/(\d+)/unlink/(\d+)/$', 'cwschedule.views.unlink_node', name='unlink_node'),
+    url(r'^node/(\d+)/update/$', 'cwschedule.views.update_node', name='update_node'),
+    url(r'^node/(\d+)/$', 'cwschedule.views.node', name='node'),
+    url(r'^node/(\d+)/details/$', 'cwschedule.views.node_details', name='node_details'),
     url(r'^node/(\d+)/children/$', 'cwschedule.views.node_children', name='node_children'),
+
+    url(r'^ac/path/$', 'cwschedule.views.ac_path', name='ac_path'),
 )

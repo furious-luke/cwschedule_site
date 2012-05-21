@@ -90,6 +90,15 @@ function node_has_child(node) {
 ///
 ///
 ///
+function node_has_child_pk(node, pk) {
+    var children = node_children_pks(node);
+    var idx = children.indexOf(pk);
+    return idx != undefined;
+}
+
+///
+///
+///
 function node_remove_child_pk(node, pk) {
     var children = node_children_pks(node);
     var idx = children.indexOf(pk);
@@ -97,6 +106,30 @@ function node_remove_child_pk(node, pk) {
 	children.splice(idx, 1);
 	node.attr('ch', children.join(' '));
     }
+}
+
+///
+///
+///
+function node_remove_parent_pk(node, pk) {
+    var parents = node_parent_pks(node);
+    var idx = parents.indexOf(pk);
+    if(idx != undefined) {
+	parents.splice(idx, 1);
+	node.attr('pa', parents.join(' '));
+    }
+}
+
+///
+///
+///
+function node_prepend_child_pk(node, pk) {
+    var cur = node.attr('ch');
+    if(cur)
+        cur = pk + ' ' + cur;
+    else
+        cur = pk + '';
+    node.attr('ch', cur);
 }
 
 ///

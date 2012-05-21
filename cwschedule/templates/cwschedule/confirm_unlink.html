@@ -1,0 +1,21 @@
+<div id="modal-confirm-unlink" class="modal hide fade">
+
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">x</a>
+    <h3>Confirm unlink</h3>
+  </div>
+
+  <div class="modal-body">
+    <p>Are you sure you want to unlink the task <b></b>?</p>
+  </div>
+
+  <div class="modal-footer">
+    <form url="/dummy/" method="post">{% csrf_token %}
+      <button class="btn" data-dismiss="modal">Cancel</button>
+      <button class="btn btn-primary">Unlink</a>
+    </form>
+  </div>
+</div>
+
+
+

@@ -18,6 +18,7 @@
 			data_type: 'json',
 			ctrls: undefined,
 			waiting: $this.find('.waiting'),
+                        before_submit: undefined,
 			success: undefined,
 			form_error: undefined,
 			error: undefined,
@@ -26,15 +27,11 @@
 		    }, options));
 		    data = $this.data('ajax_form');
 		}
+                else {
 
-		// // Store the initial values for each element. We need these to
-		// // determine if anything has changed on a tab.
-		// $this.find('input[type!="checkbox"], textarea, select').map(function(){
-		//     $(this).attr('initial', $(this).val());
-		// });
-		// $this.find('input[type="checkbox"]').map(function(){
-		//     $(this).attr('initial', $(this).attr('checked'));
-		// });
+                    // Update to new options.
+                    $.extend(data, options);
+                }
 
 		// Convert the form to an ajax form.
 		$this.ajaxForm({
@@ -52,7 +49,11 @@
 			var ctrls = $this.find(all_inputs_selector);
 			if(data.ctrls)
 			    ctrls = ctrls.add(data.ctrls);
-			ctrls.attr_stack('push', ['disabled', 'class']).attr('disabled', 'disabled').addClass('ui-state-disabled');
+			ctrls.attr_stack('push', ['disabled', 'class']).attr('disabled', 'disabled').addClass('ui-state-disabled disabled');
+
+                        // Call any user supplied routine.
+                        if(data.before_submit)
+                            data.before_submit(form_data, form);
     		    },
     		    success: function(response) {
 

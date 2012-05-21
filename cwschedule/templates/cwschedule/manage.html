@@ -1,8 +1,11 @@
 {% extends "site_base.html" %}
 
 {% block css %}{{ block.super }}
+  <link rel="stylesheet" href="{{ STATIC_URL }}waiting/css/waiting.css">
   <link rel="stylesheet" href="{{ STATIC_URL }}ajax_form/css/jquery.ajax_form.css">
-  <link rel="stylesheet" href="{{ STATIC_URL }}css/new_node.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/create_node.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/link_node.css">
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/details.css">
   <link rel="stylesheet" href="{{ STATIC_URL }}css/test.css">
 {% endblock %}
 
@@ -10,10 +13,14 @@
   <script src="{{ STATIC_URL }}attr_stack/js/jquery.attr_stack.js"></script>
   <script src="{{ STATIC_URL }}ajax_form/js/jquery.form.js"></script>
   <script src="{{ STATIC_URL }}ajax_form/js/jquery.ajax_form.js"></script>
-  <script src="{{ STATIC_URL }}js/tree.js"></script>
-  <script src="{{ STATIC_URL }}js/tree_navigation.js"></script>
+  <script src="{{ STATIC_URL }}reform/js/jquery.reform.js"></script>
+  <script src="{{ STATIC_URL }}tree/js/jquery.tree.js"></script>
+  <script src="{{ STATIC_URL }}js/create_node.js"></script>
+  <script src="{{ STATIC_URL }}js/link_node.js"></script>
+  <script src="{{ STATIC_URL }}js/confirm_delete.js"></script>
+  <script src="{{ STATIC_URL }}js/confirm_unlink.js"></script>
+  <script src="{{ STATIC_URL }}js/details_dialog.js"></script>
   <script src="{{ STATIC_URL }}js/manage.js"></script>
-  <script src="{{ STATIC_URL }}js/new_node.js"></script>
 {% endblock %}
 
 {% block heading %}Manage{% endblock %}
@@ -33,7 +40,7 @@
 
     <div class="node">
       <div class="left-controls">
-        <div class="control new-root btn" title="New root task">
+        <div class="control create-root btn" title="Create root task">
           <i class="icon-plus"></i>
         </div>
       </div>
@@ -42,9 +49,11 @@
   </div>
 
   {% include "cwschedule/tree.html" %}
-  {% include "cwschedule/new_node.html" %}
-  {% include "cwschedule/actions.html" %}
+  {% include "cwschedule/create_node.html" %}
+  {% include "cwschedule/link_node.html" %}
   {% include "cwschedule/flat_tree.html" %}
   {% include "cwschedule/confirm_delete.html" %}
+  {% include "cwschedule/confirm_unlink.html" %}
+  {% include "cwschedule/details_dialog.html" %}
 
 {% endblock %}

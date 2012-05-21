@@ -1,0 +1,18 @@
+{% load bootstrap_tags %}
+
+<div class="reform repeating">
+  {{ repeating_formset.management_form }}
+  {% for form in repeating_formset %}
+    <div class="reform-form">
+      Every {{ form.skip }} {{ form.period }}
+      {% if repeating_formset.can_delete %}
+        <span class="delete">
+          {{ form.DELETE }}{{ form.DELETE.label_tag }}
+	</span>
+      {% endif %}
+      {% for field in form.hidden_fields %}
+        {{ field  }}
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
