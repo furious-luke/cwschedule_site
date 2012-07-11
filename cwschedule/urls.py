@@ -21,5 +21,8 @@ urlpatterns = patterns('',
     url(r'^node/(\d+)/details/$', 'cwschedule.views.node_details', name='node_details'),
     url(r'^node/(\d+)/children/$', 'cwschedule.views.node_children', name='node_children'),
 
+    url(r'^node/(\d+)/activate/$', 'cwschedule.views.activate', name='activate'),
+    url(r'^active/(\d+)/deactivate/$', 'cwschedule.views.deactivate', name='deactivate'),
+
     url(r'^ac/path/$', 'cwschedule.views.ac_path', name='ac_path'),
 )

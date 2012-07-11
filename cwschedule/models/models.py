@@ -212,9 +212,9 @@ class Active(Model):
     class Meta:
         app_label = 'cwschedule'
 
-    def stop_tracking(self):
-        duration = datetime.datetime.now() - self.begin
-        remaining_today = datetime.datetime.combine(self.begin.date() + datetime.timedelta(days=1), datetime.time(0)) - self.begin
+    def deactivate(self):
+        duration = datetime.datetime.now(self.begin.tzinfo) - self.begin
+        remaining_today = datetime.datetime.combine(self.begin.date() + datetime.timedelta(days=1), datetime.time(0, tzinfo=self.begin.tzinfo)) - self.begin
 
         self.work.node.accumulated += duration
         self.work.node.save()

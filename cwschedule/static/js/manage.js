@@ -43,10 +43,38 @@ function node_update(event, tree, node) {
     else {
         actions.find('.control.activate').show();
         actions.find('.control.activate').click(function() {
-            // // Ajax request.
-            // if(ajax('/node/' + node.attr('pk') + '/activate/')) {
-            //     // Show active node.
-            // }
+	    var btn = $(this);
+	    if(btn.attr('disabled'))
+		return;
+
+	    var cur_off = $('.control.activate:hidden');
+	    // btn.removeClass('ui-state-hover');
+	    btn.hide();
+	    $('.control.activate').attr('disabled', true).css('cursor', 'default');
+	    var node = btn.closest('.node');
+	    // node.find('.waiting').show();
+	    var pk = node.attr('pk');
+	    $.post(
+		'/node/' + pk + '/activate/',
+		function(response, status) {
+		    // node.find('.waiting').hide();
+		    $('.control.activate').removeAttr('disabled').css('cursor', 'pointer');
+		    if(status == 'success') {
+			cur_off.show();
+			show_active(response.work);
+		    }
+		    else {
+			btn.show();
+			alert('Server error.');
+		    }
+		},
+		'json'
+	    ).error(function() {
+		btn.show();
+		// node.find('.waiting').hide();
+		$('.start-tracking-button').removeAttr('disabled').css('cursor', 'pointer');
+		alert('Server error.');
+	    });
         });
     }
 }

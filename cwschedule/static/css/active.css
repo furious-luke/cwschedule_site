@@ -1,0 +1,37 @@
+.active.navbar {
+    top: 40px;
+    z-index: 5;
+}
+
+.active.container {
+    overflow: auto;
+}
+
+.active-align-right {
+    position: relative;
+    width: 600px;
+    height: 32px;
+    float: right;
+    overflow: auto;
+}
+
+.active-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    overflow: auto;
+}
+
+.active-content > p {
+    margin-bottom: 0;
+    margin-top: 8px;
+    margin-right: 10px;
+    float: left;
+}
+
+.active-content .stop-tracking-button {
+    /* margin-top: 3px; */
+    /* margin-right: 10px; */
+    float: right;
+}

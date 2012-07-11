@@ -1,0 +1,12 @@
+<div class="active navbar navbar-fixed-top">
+  <div class="active container">
+    <div class="active-align-right" pk="{{ active.pk }}" {% if not active %} style="display:none"{% endif %}>
+      <div class="active-content btn btn-danger">
+	<p><strong>{{ active.work.node }}</strong></p>
+        <div class="control stop-tracking-button btn" title="Stop tracking">
+          <i class="icon-stop"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
