@@ -87,7 +87,7 @@
                 }
             });
         },
-        
+
         ///
         /// Extract the parents or children pks from nodes.
         ///
@@ -204,6 +204,15 @@
             for(var ii = 0; ii < pks.length; ++ii)
                 pks[ii] = '.node[pk="' + pks[ii] + '"]';
             return this.find(pks.join(', '));
+        },
+
+        ///
+        ///
+        ///
+        root_nodes: function() {
+            var tree = this;
+
+            return tree.find('.root > .children > .node');
         },
         
         ///
@@ -322,6 +331,36 @@
             if(!loc_node.hasClass('root'))
                 child_ctr.toggle(data.expand_all);
         },
+
+        ///
+        ///
+        ///
+        expand_all: function() {
+            var tree = this;
+
+            function callback(node) {
+                methods.children.call(tree, node).each(function() {
+                    if(methods.has_child.call(tree, $(this)))
+                        methods.toggle_children.call(tree, $(this), true, callback);
+                });
+            }
+
+            methods.root_nodes.call(tree).each(function() {
+                if(methods.has_child.call(tree, $(this)))
+                    methods.toggle_children.call(tree, $(this), true, callback);
+            });
+        },
+
+        ///
+        ///
+        ///
+        collapse_all: function() {
+            var tree = this;
+
+            tree.find('> .root > .children .node').each(function() {
+                methods.toggle_children.call(tree, $(this), false);
+            });
+        },
         
         ///
         ///
@@ -391,7 +430,7 @@
 
                         // Call the callback.
                         if(callback)
-                            callback(tree, child_ctr.children('.node'));
+                            callback.call(tree, node);// child_ctr.children('.node'));
                     }
                     else {
                         alert('Server error.');
@@ -489,7 +528,11 @@
         },
 
         ///
+        /// Update a node after modification.
         ///
+        /// Notes: The entire branch of the node that was edited is removed.
+        ///        I do this because it is unknown how the editing of the node
+        ///        could affect its children.
         ///
         update_node: function(pk, callback) {
             var tree = this;
@@ -517,12 +560,22 @@
                         // Pull out the loaded node and insert it.
                         loaded_node = loaded_node.children();
                         tree.find('.node[pk="' + pk + '"]').each(function() {
-                            $(this).find('> .container > .center').html(
-                                loaded_node.find('> .container > .center').clone()
-                            );
+
+                            // Actually replace the node.
+                            // TODO: This causes the loss of branch states; will need to
+                            // store the current branch state and see if we can bring it back.
+                            var tmp = loaded_node.clone();
+                            $(this).replaceWith(tmp);
+                            // $(this).find('> .container > .center').html(
+                            //     loaded_node.find('> .container > .center').clone()
+                            // );
+
+                            // Setup the navigation.
+                            if(data.navigation)
+                                methods.setup_navigation.call(tree, tmp);
 
                             // Trigger node update.
-                            tree.trigger('node_update', [tree, $(this)]);
+                            tree.trigger('node_ready', [tree, tmp]);
                         });
                     }
                     else {

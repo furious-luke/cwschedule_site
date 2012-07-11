@@ -23,9 +23,32 @@ function toggle_nodes(state) {
 ///
 function node_update(event, tree, node) {
     var center = node.find('> .container > .center');
+    var actions = node.find('> .container .actions');
 
     // Enable all center tooltips.
     center.find('[title]').tooltip();
+
+    // Setup unlink, depends on whether this node has a parent.
+    actions.find('.control.unlink').toggle(tree.tree('has_parent', node)).click(function() {
+        $('#modal-confirm-unlink .modal-body p b').html(
+            $(this).closest('.container').find('.name').text()
+        );
+        $('#modal-confirm-unlink').prop('node', node);
+    });
+
+    // Setup the activate button depending on whether the node is a category
+    // and whether the node is already active.
+    if(node.attr('kind') == 'P' || $('.active-node').attr('pk') == node.attr('pk'))
+        actions.find('.control.activate').hide();
+    else {
+        actions.find('.control.activate').show();
+        actions.find('.control.activate').click(function() {
+            // // Ajax request.
+            // if(ajax('/node/' + node.attr('pk') + '/activate/')) {
+            //     // Show active node.
+            // }
+        });
+    }
 }
 
 ///
@@ -103,14 +126,6 @@ function setup_node(event, tree, node) {
         });
     });
 
-    // Setup unlink.
-    actions.find('.control.unlink').toggle(tree.tree('has_parent', node)).click(function() {
-        $('#modal-confirm-unlink .modal-body p b').html(
-            $(this).closest('.container').find('.name').text()
-        );
-        $('#modal-confirm-unlink').prop('node', node);
-    });
-
     // Setup delete.
     actions.find('.control.delete').click(function() {
         $('#modal-confirm-delete .modal-body p b').html(
@@ -133,10 +148,16 @@ function setup_node(event, tree, node) {
         // Grow the tree.
         $('.tree').tree('grow');
 
-        // Setup action for new root node.
+        // Setup action for main controls.
         $('.control.create-root').click(function() {
             insert_create_node_controls($('.tree'), $('.node.root:first > .children:first'));
-        });
+        }).tooltip();
+        $('.control.expand-all').click(function() {
+            $('.tree').tree('expand_all');
+        }).tooltip();
+        $('.control.collapse-all').click(function() {
+            $('.tree').tree('collapse_all');
+        }).tooltip();
 
     });
 }( window.jQuery || window.ender );
