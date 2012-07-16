@@ -13,4 +13,3 @@ django-social-auth
 South
 django-generic-confirmation
 django-threadedcomments
-openopt
